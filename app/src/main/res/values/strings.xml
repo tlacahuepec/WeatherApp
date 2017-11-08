@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="city_name">City Name</string>
+    <string name="search">Search</string>
+    <string name="city">City</string>
+    <string name="main">Main</string>
+    <string name="description">Description</string>
+    <string name="icon">Icon</string>
+    <string name="humidity">Humidity</string>
+    <string name="temperature">Temperature</string>
+    <string name="pressure">Pressure</string>
+    <string name="temperature_max">Temperature Max</string>
+    <string name="temperature_min">Temperature Min</string>
+    <string name="ivicontxt">ivIconTxt</string>
 </resources>

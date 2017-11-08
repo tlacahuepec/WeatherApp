@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+// Use `WEATHER_API_KEY` as a System Environment variable to provide weather
+// api key to this project
+ext.weatherApiKey = System.getenv('WEATHERAPP_WEATHER_API_KEY')
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -9,6 +13,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_KEY", "\"$project.weatherApiKey\""
+        buildConfigField "String", "API_URL", "\"http://api.openweathermap.org\""
+        buildConfigField "String", "API_URL_IMG", "\"http://openweathermap.org/img/w/\""
     }
     buildTypes {
         release {
@@ -19,10 +27,29 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    // Networking
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+    // Rx Java
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.3.0'
+    // Dagger
+    implementation 'com.google.dagger:dagger:2.13'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
+    // Memory Leaks
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    // Log
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    // Testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
